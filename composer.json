@@ -1,0 +1,29 @@
+{
+    "name": "alshahen/laravel-paytabs",
+    "description": "Laravel Package can make a payments process from Paytabs in your application",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed Hassan",
+            "email": "ahmad.alshahen@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "7.0",
+        "ext-json": "*"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Alshahen\\Paytabs\\" : "src/"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
+            "Alshahen\\Paytabs\\Tests\\" : "tests"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
