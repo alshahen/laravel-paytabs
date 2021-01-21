@@ -2,7 +2,6 @@
 namespace Alshahen\Paytabs;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
 
@@ -23,17 +22,24 @@ class Paytabs
      * @param string $serverKey
      * @param Client|null $client
      */
-    public function __construct(array $fields, string $serverKey, Client $client = null)
+    public function __construct(string $serverKey, Client $client = null)
     {
         $this->client = $client ?? new Client(['base_uri' => self::API_ENDPOINT]);
-        $this->fields = $fields;
         $this->serverKey = $serverKey;
     }
 
     /**
-     * Create Payment request
+     * Set request fields
+     * @param array $fields
+     */
+    public function setFields(array $fields){
+        $this->fields = $fields;
+    }
+
+    /**
+     * Make Payment request
      * @return ResponseInterface
-     * @throws GuzzleException
+     * @throws RequestException
      */
     public function payment()
     {

@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "7.0",
+        "guzzlehttp/guzzle": "^6.5.0",
         "ext-json": "*"
     },
     "autoload" : {
@@ -24,6 +24,17 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^6.9"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alshahen\\Paytabs\\PaytabsServiceProvider"
+            ],
+            "aliases": {
+                "Paytabs": "Alshahen\\Paytabs\\Facades\\Paytabs"
+            }
+        }
     }
 }
