@@ -15,25 +15,40 @@ class Paytabs
 
     protected $serverKey;
 
+    protected $profileID;
 
     /**
      * Paytabs constructor.
-     * @param array $fields
      * @param string $serverKey
+     * @param int $profileID
      * @param Client|null $client
      */
-    public function __construct(string $serverKey, Client $client = null)
+    public function __construct(string $serverKey, int $profileID, Client $client = null)
     {
         $this->client = $client ?? new Client(['base_uri' => self::API_ENDPOINT]);
         $this->serverKey = $serverKey;
+        $this->profileID = $profileID;
     }
 
     /**
      * Set request fields
      * @param array $fields
      */
-    public function setFields(array $fields){
-        $this->fields = $fields;
+    public function setFields(array $fields)
+    {
+        $this->fields = array_merge($fields, ['profile_id' => $this->profileID]);
+    }
+
+    /**
+     * Create instance
+     * @param array $fields
+     * @return $this
+     */
+    public function create(array $fields)
+    {
+        $this->setFields($fields);
+
+        return $this;
     }
 
     /**
@@ -80,12 +95,13 @@ class Paytabs
 
     }
 
-    public function redirect()
+    public function redirectURL()
     {
         $payment = $this->payment();
 
         if($payment)
-            return header('Location: ' . json_decode($payment->getBody()->getContents())->redirect_url);
+            return json_decode($payment->getBody()->getContents())->redirect_url;
+
 
     }
 

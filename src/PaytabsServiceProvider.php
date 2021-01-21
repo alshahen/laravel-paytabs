@@ -17,7 +17,7 @@ class PaytabsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('paytabs', function(){
-            return new Paytabs(config('paytabs.paytabs_serverkey'));
+            return new Paytabs(config('paytabs.server_key'), config('paytabs.profile_id'));
         });
     }
 }
